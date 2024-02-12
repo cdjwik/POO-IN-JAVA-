@@ -16,6 +16,7 @@ public class Trip {
      * INVARIANT: each of the fields is not null and non empty
      * and the date is valid
      * and  origin != destination and goodsQuantity > 0.
+     * passegero > 0
      */
 
     private @Getter String origin;
@@ -23,6 +24,8 @@ public class Trip {
     private @Getter LocalDateTime departureDate;
     private @Getter GoodsKind goodsKind;
     private @Getter double goodsQuantity;
+    private @Getter double passegero; or 
+    private double CapacitaMassima;
 
     /**
      * Creates a trip.
@@ -37,18 +40,24 @@ public class Trip {
      */
     public Trip(@NonNull String origin, @NonNull String destination,
                 @NonNull LocalDateTime departureDate,
-                GoodsKind goodsKind, double goodsQuantity) {
+                GoodsKind goodsKind, double goodsQuantity, double pasegeri, double CapacitaMassima) {
         if (origin.isEmpty() || destination.isEmpty()) {
             throw new IllegalArgumentException("Origin and destination must be non empty");
         }
         if (goodsQuantity <= 0) {
             throw new IllegalArgumentException("Goods quantity must be positive");
         }
+         if ( passegeri  >= 0 && passegeri <= CapacitaMassima  ) {
+            throw new IllegalArgumentException("Dev'essere almeno un passegero");
+        }
+        
         this.origin = origin;
         this.destination = destination;
         this.departureDate = departureDate;
         this.goodsKind = goodsKind;
         this.goodsQuantity = goodsQuantity;
+        this.passegero = passegero;
+        
     }
 
     public String toString() {
